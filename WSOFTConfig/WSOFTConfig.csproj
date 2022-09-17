@@ -1,11 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>WSOFT.Config</RootNamespace>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <Title>WSOFT.Config</Title>
+    <Authors>WSOFT</Authors>
+    <Description>This is a library for reading and writing configuration files (*.wsconf) that are easily available from the dotnet.</Description>
+    <Copyright>Copyright (c) 2022 WSOFT, Releaced under the MIT Licence</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/WSOFT-Project/WSOFTConfig</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/WSOFT-Project/WSOFTConfig</PackageProjectUrl>
+    <PackageTags>config;file;</PackageTags>
+    <PackageLicenseFile>LICENCE.md</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENCE.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

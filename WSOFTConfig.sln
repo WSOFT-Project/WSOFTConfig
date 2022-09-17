@@ -7,15 +7,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSOFTConfig", "WSOFTConfig\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSOFTConfig.Framework", "WSOFTConfig.Framework\WSOFTConfig.Framework.csproj", "{BB92A2EF-2F64-4684-9270-8E3FFA33A60E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSOFTConfig.Test", "WSOFTConfig.Test\WSOFTConfig.Test.csproj", "{01C9768D-3845-4397-ADB4-D96983667149}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSOFTConfig.UI", "WSOFTConfig.UI\WSOFTConfig.UI.csproj", "{D86B450D-0A9D-47E6-9914-FB45896633B3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSOFTConfig.UI.Test", "WSOFTConfig.UI.Test\WSOFTConfig.UI.Test.csproj", "{E7FBAFB4-9ECD-40FC-AEC9-33ECE6E1AFCC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSOFTConfig.UI.Framework", "WSOFTConfig.UI.Framework\WSOFTConfig.UI.Framework.csproj", "{76ADDA5F-194F-4C3F-BBB5-56CD836B6C40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSOFTConfig.UI.Framework.Test", "WSOFTConfig.UI.Framework.Test\WSOFTConfig.UI.Framework.Test.csproj", "{64E3EC86-797B-4F5F-833D-AEFA316019D1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{F8BB8B79-B5A4-4C1D-B424-4E1251D008F1}"
+	ProjectSection(SolutionItems) = preProject
+		LICENCE.md = LICENCE.md
+		README-ja.md = README-ja.md
+		README.md = README.md
+		..\..\..\Desktop\Screenshot.jpg = ..\..\..\Desktop\Screenshot.jpg
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +35,6 @@ Global
 		{BB92A2EF-2F64-4684-9270-8E3FFA33A60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB92A2EF-2F64-4684-9270-8E3FFA33A60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB92A2EF-2F64-4684-9270-8E3FFA33A60E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01C9768D-3845-4397-ADB4-D96983667149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01C9768D-3845-4397-ADB4-D96983667149}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01C9768D-3845-4397-ADB4-D96983667149}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01C9768D-3845-4397-ADB4-D96983667149}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D86B450D-0A9D-47E6-9914-FB45896633B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D86B450D-0A9D-47E6-9914-FB45896633B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D86B450D-0A9D-47E6-9914-FB45896633B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,10 +47,6 @@ Global
 		{76ADDA5F-194F-4C3F-BBB5-56CD836B6C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76ADDA5F-194F-4C3F-BBB5-56CD836B6C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76ADDA5F-194F-4C3F-BBB5-56CD836B6C40}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64E3EC86-797B-4F5F-833D-AEFA316019D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64E3EC86-797B-4F5F-833D-AEFA316019D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64E3EC86-797B-4F5F-833D-AEFA316019D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64E3EC86-797B-4F5F-833D-AEFA316019D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
