@@ -1,12 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>WSOFT.Config</RootNamespace>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <TargetFramework>net6.0</TargetFramework>
-    <TargetFrameworks>net6.0</TargetFrameworks>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks></TargetFrameworks>
     <Title>WSOFT.Config</Title>
     <Authors>WSOFT</Authors>
     <Description>This is a library for reading and writing configuration files (*.wsconf) that are easily available from the dotnet.</Description>
