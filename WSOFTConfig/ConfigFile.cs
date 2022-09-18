@@ -224,10 +224,10 @@ namespace WSOFT.Config
                 {
                     using (AesManaged aes = new AesManaged())
                     {
-                        aes.BlockSize = 128;              // BlockSize = 16bytes
-                        aes.KeySize = 128;                // KeySize = 16bytes
-                        aes.Mode = CipherMode.CBC;        // CBC mode
-                        aes.Padding = PaddingMode.PKCS7;    // Padding mode is "PKCS7".
+                        aes.BlockSize = 128;
+                        aes.KeySize = 128; 
+                        aes.Mode = CipherMode.CBC;  
+                        aes.Padding = PaddingMode.PKCS7;   
 
                         // salt
                         byte[] salt = new byte[16];
@@ -238,15 +238,15 @@ namespace WSOFT.Config
                         fs.Read(iv, 0, 16);
                         aes.IV = iv;
                         Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(password, salt);
-                        byte[] bufferKey = deriveBytes.GetBytes(16);    // 16バイトのsaltを切り出してパスワードに変換
+                        byte[] bufferKey = deriveBytes.GetBytes(16);
                         aes.Key = bufferKey;
 
-                        //Decryption interface.
+
                         ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
                         using (CryptoStream cse = new CryptoStream(fs, decryptor, CryptoStreamMode.Read))
                         {
-                            using (DeflateStream ds = new DeflateStream(cse, CompressionMode.Decompress))   //解凍
+                            using (DeflateStream ds = new DeflateStream(cse, CompressionMode.Decompress))
                             {
                                 while ((len = ds.Read(buffer, 0, 4096)) > 0)
                                 {
