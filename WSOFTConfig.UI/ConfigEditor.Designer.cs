@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigEditor));
             this.configEditorui1 = new WSOFT.Config.UI.ConfigEditorUI();
             this.SuspendLayout();
             // 
             // configEditorui1
             // 
+            this.configEditorui1.AllowDrop = true;
             this.configEditorui1.Config = null;
             this.configEditorui1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.configEditorui1.Location = new System.Drawing.Point(0, 0);
@@ -47,6 +49,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1113, 626);
             this.Controls.Add(this.configEditorui1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConfigEditor";
             this.Text = "ConfigEditor";
             this.ResumeLayout(false);

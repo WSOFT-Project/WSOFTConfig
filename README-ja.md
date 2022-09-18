@@ -1,4 +1,5 @@
 # WSOFTConfig( [English](README.md) / Japanese )
+![ロゴ](WSOFTConfig.svg)
 ![スクリーンショット](Screenshot.jpg)
 ## 概要
 .NETから簡単に利用できる設定ファイル(*.wsconf)を読み書きするためのライブラリです。
@@ -15,7 +16,7 @@
 * ほかのライブラリに依存せず、異なる言語への移植も容易
 
 ## 使い方
-設定ファイルを編集するには、WSOFTConfig.UI.Testを使用します。
+設定ファイルを編集するには、WSOFTConfigEditorを使用します。
 
 C#での簡単な使い方を以下に示します。
 ```csharp
