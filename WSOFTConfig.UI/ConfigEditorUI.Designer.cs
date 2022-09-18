@@ -82,6 +82,8 @@ namespace WSOFT.Config.UI
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
+            this.iOパネルの表示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -334,7 +336,9 @@ namespace WSOFT.Config.UI
             this.toolStripMenuItem5,
             this.最新の状態に更新ToolStripMenuItem,
             this.フォントの変更ToolStripMenuItem,
-            this.すべて展開ToolStripMenuItem});
+            this.すべて展開ToolStripMenuItem,
+            this.toolStripMenuItem9,
+            this.iOパネルの表示ToolStripMenuItem});
             this.表示VToolStripMenuItem.Name = "表示VToolStripMenuItem";
             this.表示VToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.表示VToolStripMenuItem.Text = "表示(&V)";
@@ -507,6 +511,7 @@ namespace WSOFT.Config.UI
             this.button1.TabIndex = 1;
             this.button1.Text = "追加";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // openFileDialog1
             // 
@@ -519,6 +524,18 @@ namespace WSOFT.Config.UI
             this.saveFileDialog1.FileName = "config.wsconf";
             this.saveFileDialog1.Filter = "WSOFTConfigファイル|*.wsconf|すべてのファイル|*.*";
             this.saveFileDialog1.Title = "ファイルに保存";
+            // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(181, 6);
+            // 
+            // iOパネルの表示ToolStripMenuItem
+            // 
+            this.iOパネルの表示ToolStripMenuItem.Name = "iOパネルの表示ToolStripMenuItem";
+            this.iOパネルの表示ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.iOパネルの表示ToolStripMenuItem.Text = "IOパネルの表示";
+            this.iOパネルの表示ToolStripMenuItem.Click += new System.EventHandler(this.iOパネルの表示ToolStripMenuItem_Click);
             // 
             // ConfigEditorUI
             // 
@@ -600,5 +617,7 @@ namespace WSOFT.Config.UI
         private ToolStripMenuItem キーのパスのコピーToolStripMenuItem1;
         private SaveFileDialog saveFileDialog1;
         private ToolStripMenuItem すべて展開ToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem9;
+        private ToolStripMenuItem iOパネルの表示ToolStripMenuItem;
     }
 }

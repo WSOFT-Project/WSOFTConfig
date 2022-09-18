@@ -408,5 +408,17 @@ namespace WSOFT.Config.UI
                 e.Effect = DragDropEffects.None;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void iOパネルの表示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var iopanel = new IOPanel();
+            iopanel.Target = this.Config;
+            iopanel.Show();
+        }
     }
 }

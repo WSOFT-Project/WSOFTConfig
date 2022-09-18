@@ -1,17 +1,21 @@
 using System;
 using System.Windows.Forms;
+using WSOFT.Config.UI;
 
-namespace WSOFTConfig.UI.Test
+namespace WSOFTConfigEditor
 {
     internal static class Program
     {
-
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
         [STAThread]
         static void Main()
         {
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new WSOFT.Config.UI.ConfigEditor());
+            Application.Run(new ConfigEditor());
         }
     }
 }

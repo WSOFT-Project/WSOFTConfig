@@ -5,13 +5,7 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSOFTConfig", "WSOFTConfig\WSOFTConfig.csproj", "{99BACE25-C1C0-4469-AF1B-C112A6115CDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSOFTConfig.Framework", "WSOFTConfig.Framework\WSOFTConfig.Framework.csproj", "{BB92A2EF-2F64-4684-9270-8E3FFA33A60E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSOFTConfig.UI", "WSOFTConfig.UI\WSOFTConfig.UI.csproj", "{D86B450D-0A9D-47E6-9914-FB45896633B3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSOFTConfig.UI.Test", "WSOFTConfig.UI.Test\WSOFTConfig.UI.Test.csproj", "{E7FBAFB4-9ECD-40FC-AEC9-33ECE6E1AFCC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSOFTConfig.UI.Framework", "WSOFTConfig.UI.Framework\WSOFTConfig.UI.Framework.csproj", "{76ADDA5F-194F-4C3F-BBB5-56CD836B6C40}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{F8BB8B79-B5A4-4C1D-B424-4E1251D008F1}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目
 		README.md = README.md
 		Screenshot.jpg = Screenshot.jpg
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSOFTConfigEditor", "WSOFTConfigEditor\WSOFTConfigEditor.csproj", "{8BA6461B-93EE-41DB-BCF2-27B995AFDCC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,22 +27,14 @@ Global
 		{99BACE25-C1C0-4469-AF1B-C112A6115CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99BACE25-C1C0-4469-AF1B-C112A6115CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99BACE25-C1C0-4469-AF1B-C112A6115CDA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BB92A2EF-2F64-4684-9270-8E3FFA33A60E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB92A2EF-2F64-4684-9270-8E3FFA33A60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB92A2EF-2F64-4684-9270-8E3FFA33A60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB92A2EF-2F64-4684-9270-8E3FFA33A60E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D86B450D-0A9D-47E6-9914-FB45896633B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D86B450D-0A9D-47E6-9914-FB45896633B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D86B450D-0A9D-47E6-9914-FB45896633B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D86B450D-0A9D-47E6-9914-FB45896633B3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7FBAFB4-9ECD-40FC-AEC9-33ECE6E1AFCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7FBAFB4-9ECD-40FC-AEC9-33ECE6E1AFCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7FBAFB4-9ECD-40FC-AEC9-33ECE6E1AFCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7FBAFB4-9ECD-40FC-AEC9-33ECE6E1AFCC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76ADDA5F-194F-4C3F-BBB5-56CD836B6C40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76ADDA5F-194F-4C3F-BBB5-56CD836B6C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76ADDA5F-194F-4C3F-BBB5-56CD836B6C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76ADDA5F-194F-4C3F-BBB5-56CD836B6C40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BA6461B-93EE-41DB-BCF2-27B995AFDCC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BA6461B-93EE-41DB-BCF2-27B995AFDCC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BA6461B-93EE-41DB-BCF2-27B995AFDCC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BA6461B-93EE-41DB-BCF2-27B995AFDCC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
