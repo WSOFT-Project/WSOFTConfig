@@ -13,9 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目
 		README-ja.md = README-ja.md
 		README.md = README.md
 		Screenshot.jpg = Screenshot.jpg
+		WSOFTConfig.svg = WSOFTConfig.svg
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSOFTConfigEditor", "WSOFTConfigEditor\WSOFTConfigEditor.csproj", "{8BA6461B-93EE-41DB-BCF2-27B995AFDCC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSOFTConfigEditor", "WSOFTConfigEditor\WSOFTConfigEditor.csproj", "{8BA6461B-93EE-41DB-BCF2-27B995AFDCC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

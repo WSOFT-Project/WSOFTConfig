@@ -43,13 +43,14 @@ namespace WSOFT.Config.UI
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.キーのパスのコピーToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.dataEditor1 = new WSOFT.Config.UI.ValueEditor();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新規NToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.開くOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.名前を付けて保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
+            this.ファイルからインポートToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.編集EToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新規ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
@@ -66,8 +67,11 @@ namespace WSOFT.Config.UI
             this.最新の状態に更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.フォントの変更ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.すべて展開ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
+            this.iOパネルの表示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataEditor1 = new WSOFT.Config.UI.ValueEditor();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -82,8 +86,6 @@ namespace WSOFT.Config.UI
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
-            this.iOパネルの表示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -98,9 +100,12 @@ namespace WSOFT.Config.UI
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.textBox1.Location = new System.Drawing.Point(0, 24);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(1092, 23);
+            this.textBox1.Size = new System.Drawing.Size(936, 19);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // treeView1
             // 
@@ -108,9 +113,10 @@ namespace WSOFT.Config.UI
             this.treeView1.ContextMenuStrip = this.contextMenuStrip1;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeView1.LabelEdit = true;
-            this.treeView1.Location = new System.Drawing.Point(0, 47);
+            this.treeView1.Location = new System.Drawing.Point(0, 43);
+            this.treeView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(160, 587);
+            this.treeView1.Size = new System.Drawing.Size(138, 464);
             this.treeView1.TabIndex = 1;
             this.treeView1.BeforeLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_BeforeLabelEdit);
             this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
@@ -187,20 +193,12 @@ namespace WSOFT.Config.UI
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(160, 47);
+            this.splitter1.Location = new System.Drawing.Point(138, 43);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 587);
+            this.splitter1.Size = new System.Drawing.Size(3, 464);
             this.splitter1.TabIndex = 2;
             this.splitter1.TabStop = false;
-            // 
-            // dataEditor1
-            // 
-            this.dataEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataEditor1.Location = new System.Drawing.Point(3, 3);
-            this.dataEditor1.Name = "dataEditor1";
-            this.dataEditor1.Size = new System.Drawing.Size(915, 514);
-            this.dataEditor1.TabIndex = 3;
-            this.dataEditor1.Value = null;
             // 
             // menuStrip1
             // 
@@ -210,7 +208,8 @@ namespace WSOFT.Config.UI
             this.表示VToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1092, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(936, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -220,7 +219,9 @@ namespace WSOFT.Config.UI
             this.新規NToolStripMenuItem,
             this.開くOToolStripMenuItem,
             this.保存SToolStripMenuItem,
-            this.名前を付けて保存ToolStripMenuItem});
+            this.名前を付けて保存ToolStripMenuItem,
+            this.toolStripMenuItem10,
+            this.ファイルからインポートToolStripMenuItem});
             this.ファイルFToolStripMenuItem.Name = "ファイルFToolStripMenuItem";
             this.ファイルFToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.ファイルFToolStripMenuItem.Text = "ファイル(&F)";
@@ -228,21 +229,21 @@ namespace WSOFT.Config.UI
             // 新規NToolStripMenuItem
             // 
             this.新規NToolStripMenuItem.Name = "新規NToolStripMenuItem";
-            this.新規NToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.新規NToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.新規NToolStripMenuItem.Text = "新規(&N)";
             this.新規NToolStripMenuItem.Click += new System.EventHandler(this.新規NToolStripMenuItem_Click);
             // 
             // 開くOToolStripMenuItem
             // 
             this.開くOToolStripMenuItem.Name = "開くOToolStripMenuItem";
-            this.開くOToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.開くOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.開くOToolStripMenuItem.Text = "開く(&O)";
             this.開くOToolStripMenuItem.Click += new System.EventHandler(this.開くOToolStripMenuItem_Click);
             // 
             // 保存SToolStripMenuItem
             // 
             this.保存SToolStripMenuItem.Name = "保存SToolStripMenuItem";
-            this.保存SToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.保存SToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.保存SToolStripMenuItem.Text = "保存(&S)";
             this.保存SToolStripMenuItem.Click += new System.EventHandler(this.保存SToolStripMenuItem_Click);
             // 
@@ -252,9 +253,21 @@ namespace WSOFT.Config.UI
             this.名前を付けて保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
             this.名前を付けて保存ToolStripMenuItem.ShowShortcutKeys = false;
-            this.名前を付けて保存ToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.名前を付けて保存ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.名前を付けて保存ToolStripMenuItem.Text = "名前を付けて保存";
             this.名前を付けて保存ToolStripMenuItem.Click += new System.EventHandler(this.名前を付けて保存ToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem10
+            // 
+            this.toolStripMenuItem10.Name = "toolStripMenuItem10";
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(177, 6);
+            // 
+            // ファイルからインポートToolStripMenuItem
+            // 
+            this.ファイルからインポートToolStripMenuItem.Name = "ファイルからインポートToolStripMenuItem";
+            this.ファイルからインポートToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ファイルからインポートToolStripMenuItem.Text = "ファイルからインポート";
+            this.ファイルからインポートToolStripMenuItem.Click += new System.EventHandler(this.ファイルからインポートToolStripMenuItem_Click);
             // 
             // 編集EToolStripMenuItem
             // 
@@ -342,6 +355,7 @@ namespace WSOFT.Config.UI
             this.表示VToolStripMenuItem.Name = "表示VToolStripMenuItem";
             this.表示VToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.表示VToolStripMenuItem.Text = "表示(&V)";
+            this.表示VToolStripMenuItem.Click += new System.EventHandler(this.表示VToolStripMenuItem_Click);
             // 
             // アドレスバーToolStripMenuItem
             // 
@@ -379,45 +393,71 @@ namespace WSOFT.Config.UI
             this.すべて展開ToolStripMenuItem.Text = "すべて展開";
             this.すべて展開ToolStripMenuItem.Click += new System.EventHandler(this.すべて展開ToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(181, 6);
+            // 
+            // iOパネルの表示ToolStripMenuItem
+            // 
+            this.iOパネルの表示ToolStripMenuItem.Name = "iOパネルの表示ToolStripMenuItem";
+            this.iOパネルの表示ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.iOパネルの表示ToolStripMenuItem.Text = "IOパネルの表示";
+            this.iOパネルの表示ToolStripMenuItem.Click += new System.EventHandler(this.iOパネルの表示ToolStripMenuItem_Click);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(163, 47);
+            this.tabControl1.Location = new System.Drawing.Point(141, 43);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(929, 587);
+            this.tabControl1.Size = new System.Drawing.Size(795, 464);
             this.tabControl1.TabIndex = 5;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dataEditor1);
             this.tabPage1.Controls.Add(this.panel3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(921, 559);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage1.Size = new System.Drawing.Size(787, 438);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "値";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dataEditor1
+            // 
+            this.dataEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataEditor1.Location = new System.Drawing.Point(3, 2);
+            this.dataEditor1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataEditor1.Name = "dataEditor1";
+            this.dataEditor1.Size = new System.Drawing.Size(781, 403);
+            this.dataEditor1.TabIndex = 3;
+            this.dataEditor1.Value = null;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.button2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(3, 517);
+            this.panel3.Location = new System.Drawing.Point(3, 405);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(915, 39);
+            this.panel3.Size = new System.Drawing.Size(781, 31);
             this.panel3.TabIndex = 4;
             // 
             // button3
             // 
-            this.button3.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(466, 6);
+            this.button3.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F);
+            this.button3.Location = new System.Drawing.Point(399, 5);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 30);
+            this.button3.Size = new System.Drawing.Size(77, 24);
             this.button3.TabIndex = 1;
             this.button3.Text = "再読み込み";
             this.button3.UseVisualStyleBackColor = true;
@@ -425,10 +465,11 @@ namespace WSOFT.Config.UI
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(258, 6);
+            this.button2.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F);
+            this.button2.Location = new System.Drawing.Point(221, 5);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 30);
+            this.button2.Size = new System.Drawing.Size(75, 24);
             this.button2.TabIndex = 0;
             this.button2.Text = "適用";
             this.button2.UseVisualStyleBackColor = true;
@@ -439,10 +480,11 @@ namespace WSOFT.Config.UI
             this.tabPage2.Controls.Add(this.valueEditor1);
             this.tabPage2.Controls.Add(this.splitter2);
             this.tabPage2.Controls.Add(this.panel2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(921, 559);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage2.Size = new System.Drawing.Size(787, 438);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "属性";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -450,17 +492,19 @@ namespace WSOFT.Config.UI
             // valueEditor1
             // 
             this.valueEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.valueEditor1.Location = new System.Drawing.Point(171, 3);
+            this.valueEditor1.Location = new System.Drawing.Point(147, 2);
+            this.valueEditor1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.valueEditor1.Name = "valueEditor1";
-            this.valueEditor1.Size = new System.Drawing.Size(747, 553);
+            this.valueEditor1.Size = new System.Drawing.Size(637, 434);
             this.valueEditor1.TabIndex = 2;
             this.valueEditor1.Value = null;
             // 
             // splitter2
             // 
-            this.splitter2.Location = new System.Drawing.Point(168, 3);
+            this.splitter2.Location = new System.Drawing.Point(144, 2);
+            this.splitter2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 553);
+            this.splitter2.Size = new System.Drawing.Size(3, 434);
             this.splitter2.TabIndex = 5;
             this.splitter2.TabStop = false;
             // 
@@ -469,19 +513,21 @@ namespace WSOFT.Config.UI
             this.panel2.Controls.Add(this.listBox1);
             this.panel2.Controls.Add(this.panel1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Location = new System.Drawing.Point(3, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(165, 553);
+            this.panel2.Size = new System.Drawing.Size(141, 434);
             this.panel2.TabIndex = 4;
             // 
             // listBox1
             // 
             this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
+            this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(0, 0);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(165, 528);
+            this.listBox1.Size = new System.Drawing.Size(141, 414);
             this.listBox1.TabIndex = 0;
             // 
             // panel1
@@ -489,25 +535,28 @@ namespace WSOFT.Config.UI
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 528);
+            this.panel1.Location = new System.Drawing.Point(0, 414);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(165, 25);
+            this.panel1.Size = new System.Drawing.Size(141, 20);
             this.panel1.TabIndex = 3;
             // 
             // textBox2
             // 
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox2.Location = new System.Drawing.Point(0, 0);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(110, 23);
+            this.textBox2.Size = new System.Drawing.Size(94, 19);
             this.textBox2.TabIndex = 0;
             // 
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button1.Location = new System.Drawing.Point(110, 0);
+            this.button1.Location = new System.Drawing.Point(94, 0);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(55, 25);
+            this.button1.Size = new System.Drawing.Size(47, 20);
             this.button1.TabIndex = 1;
             this.button1.Text = "追加";
             this.button1.UseVisualStyleBackColor = true;
@@ -525,30 +574,19 @@ namespace WSOFT.Config.UI
             this.saveFileDialog1.Filter = "WSOFTConfigファイル|*.wsconf|すべてのファイル|*.*";
             this.saveFileDialog1.Title = "ファイルに保存";
             // 
-            // toolStripMenuItem9
-            // 
-            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(181, 6);
-            // 
-            // iOパネルの表示ToolStripMenuItem
-            // 
-            this.iOパネルの表示ToolStripMenuItem.Name = "iOパネルの表示ToolStripMenuItem";
-            this.iOパネルの表示ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.iOパネルの表示ToolStripMenuItem.Text = "IOパネルの表示";
-            this.iOパネルの表示ToolStripMenuItem.Click += new System.EventHandler(this.iOパネルの表示ToolStripMenuItem_Click);
-            // 
             // ConfigEditorUI
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menuStrip1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ConfigEditorUI";
-            this.Size = new System.Drawing.Size(1092, 634);
+            this.Size = new System.Drawing.Size(936, 507);
             this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -619,5 +657,7 @@ namespace WSOFT.Config.UI
         private ToolStripMenuItem すべて展開ToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem9;
         private ToolStripMenuItem iOパネルの表示ToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem10;
+        private ToolStripMenuItem ファイルからインポートToolStripMenuItem;
     }
 }

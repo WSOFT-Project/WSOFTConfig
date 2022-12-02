@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 
@@ -144,6 +146,7 @@ namespace WSOFT.Config
                 case ObjectType.Data: return data;
                 case ObjectType.DateTime: return DateTime.FromBinary(BitConverter.ToInt64(data,0));
                 case ObjectType.String: return Encoding.UTF8.GetString(data);
+                case ObjectType.Image: return BinaryToImage(data);
             }
             return null;
         }
@@ -165,8 +168,22 @@ namespace WSOFT.Config
                 case ObjectType.Data: return (byte[])Value;
                 case ObjectType.DateTime: return BitConverter.GetBytes(((DateTime)Value).ToBinary());
                 case ObjectType.String: return Encoding.UTF8.GetBytes((string)Value);
+                case ObjectType.Image: return ImageToBinary((Bitmap)Value);
             }
             return null;
+        }
+        private static byte[] ImageToBinary(Bitmap bmp)
+        {
+            MemoryStream ms = new MemoryStream();
+            bmp.Save(ms, ImageFormat.Png);
+            return ms.GetBuffer();
+        }
+        private static Bitmap BinaryToImage(byte[] data)
+        {
+            MemoryStream ms = new MemoryStream(data);
+            Bitmap bmp = new Bitmap(ms);
+            ms.Close();
+            return bmp;
         }
         public ObjectType GetObjectType()
         {
@@ -244,10 +261,13 @@ namespace WSOFT.Config
             {
                 return ObjectType.String;
             }
-            else
+            
+            if(Value is Bitmap)
             {
-                return ObjectType.None;
+                return ObjectType.Image;
             }
+
+            return ObjectType.None;
         }
         public enum ObjectType
         {
@@ -310,7 +330,11 @@ namespace WSOFT.Config
             /// <summary>
             /// 日付時刻型
             /// </summary>
-            DateTime = 0x0f
+            DateTime = 0x0f,
+            /// <summary>
+            /// 画像型
+            /// </summary>
+            Image = 0x10
         }
     }
 }

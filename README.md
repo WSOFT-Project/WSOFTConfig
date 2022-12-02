@@ -1,4 +1,5 @@
 # WSOFTConfig( English / [Japanese](README-ja.md) )
+![Logo](WSOFTConfig.svg)
 ![Screenshot](Screenshot.jpg)
 ## Overview
 This is a library for reading and writing configuration files (*.wsconf) that are easily available from the dotnet.
@@ -15,7 +16,7 @@ The following advantages over existing configuration files are available
 * No dependence on other libraries, easy to port to different languages
 
 ## How to use
-To edit the configuration file, use WSOFTConfig.UI.Test
+To edit the configuration file, use WSOFTConfigEditor
 
 A simple usage in C# is shown below.
 ```csharp
