@@ -16,5 +16,17 @@ namespace WSOFT.Config.UI
         {
             InitializeComponent();
         }
+        public ConfigFile Config
+        {
+            get
+            {
+                return configEditorui1.Config;
+            }
+            set
+            {
+                configEditorui1.Config = value;
+                configEditorui1.Rewrite();
+            }
+        }
     }
 }

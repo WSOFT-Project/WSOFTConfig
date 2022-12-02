@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.AxHost;
 
 namespace WSOFT.Config.UI
 {
@@ -121,6 +122,10 @@ namespace WSOFT.Config.UI
                     }
                     return 0;
                 }
+                if (radioButton20.Checked)
+                {
+                    return new Bitmap(pictureBox1.Image);
+                }
                 return null;
             }
             set
@@ -200,6 +205,12 @@ namespace WSOFT.Config.UI
                 {
                     radioButton3.Checked = true;
                     limitedTextbox1.Text = ul.ToString();
+                }
+                else if(value is Bitmap bmp)
+                {
+                    radioButton20.Checked = true;
+                    pictureBox1.Image = bmp;
+                    SetChangeImage();
                 }
                 radioButton1_CheckedChanged(null,null);
             }
@@ -317,6 +328,12 @@ namespace WSOFT.Config.UI
                 tab_lock = true;
                 return;
             }
+            if (radioButton20.Checked)
+            {
+                tabControl1.SelectedIndex = 6;
+                tab_lock = true;
+                return;
+            }
             Value = null;
             tab_lock = true;
         }
@@ -410,6 +427,196 @@ namespace WSOFT.Config.UI
             {
                 File.WriteAllBytes(saveFileDialog1.FileName, binaryEditor1.Data);
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_LoadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+      
+        }
+        private void SetChangeImage()
+        {
+            numericUpDown1.Value = pictureBox1.Image.Width;
+            numericUpDown2.Value = pictureBox1.Image.Height;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
+                    SetChangeImage();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("画像の読み込み時に例外をスローしました。\r\n説明:" + ex.Message,"WSOFTConfigEditor",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBox1.Image.Save(saveFileDialog1.FileName);
+                }
+            }
+            catch(Exception ex) {
+                MessageBox.Show("画像の書き出し時に例外をスローしました。\r\n説明:"+ex.Message, "WSOFTConfigEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var bmp = new Bitmap(pictureBox1.Image);
+                pictureBox1.Image =ResizeBitmap(bmp,(int)numericUpDown1.Value,(int)numericUpDown2.Value,System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor);
+                SetChangeImage();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("画像のリサイズ時に例外をスローしました。\r\n説明:" + ex.Message, "WSOFTConfigEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private Bitmap ResizeBitmap(Bitmap original, int width, int height, System.Drawing.Drawing2D.InterpolationMode interpolationMode)
+        {
+            Bitmap bmpResize;
+            Bitmap bmpResizeColor;
+            Graphics graphics = null;
+
+            try
+            {
+                System.Drawing.Imaging.PixelFormat pf = original.PixelFormat;
+
+                if (original.PixelFormat == System.Drawing.Imaging.PixelFormat.Format8bppIndexed)
+                {
+                    // モノクロの時は仮に24bitとする
+                    pf = System.Drawing.Imaging.PixelFormat.Format24bppRgb;
+                }
+
+                bmpResizeColor = new Bitmap(width, height, pf);
+                var dstRect = new RectangleF(0, 0, width, height);
+                var srcRect = new RectangleF(-0.5f, -0.5f, original.Width, original.Height);
+                graphics = Graphics.FromImage(bmpResizeColor);
+                graphics.Clear(Color.Transparent);
+                graphics.InterpolationMode = interpolationMode;
+                graphics.DrawImage(original, dstRect, srcRect, GraphicsUnit.Pixel);
+
+            }
+            finally
+            {
+                if (graphics != null)
+                {
+                    graphics.Dispose();
+                }
+            }
+
+            if (original.PixelFormat == System.Drawing.Imaging.PixelFormat.Format8bppIndexed)
+            {
+                // モノクロ画像のとき、24bit→8bitへ変換
+
+                // モノクロBitmapを確保
+                bmpResize = new Bitmap(
+                    bmpResizeColor.Width,
+                    bmpResizeColor.Height,
+                    System.Drawing.Imaging.PixelFormat.Format8bppIndexed
+                    );
+
+                var pal = bmpResize.Palette;
+                for (int i = 0; i < bmpResize.Palette.Entries.Length; i++)
+                {
+                    pal.Entries[i] = original.Palette.Entries[i];
+                }
+                bmpResize.Palette = pal;
+
+                // カラー画像のポインタへアクセス
+                var bmpDataColor = bmpResizeColor.LockBits(
+                        new Rectangle(0, 0, bmpResizeColor.Width, bmpResizeColor.Height),
+                        System.Drawing.Imaging.ImageLockMode.ReadWrite,
+                        bmpResizeColor.PixelFormat
+                        );
+
+                // モノクロ画像のポインタへアクセス
+                var bmpDataMono = bmpResize.LockBits(
+                        new Rectangle(0, 0, bmpResize.Width, bmpResize.Height),
+                        System.Drawing.Imaging.ImageLockMode.ReadWrite,
+                        bmpResize.PixelFormat
+                        );
+
+                int colorStride = bmpDataColor.Stride;
+                int monoStride = bmpDataMono.Stride;
+
+                unsafe
+                {
+                    var pColor = (byte*)bmpDataColor.Scan0;
+                    var pMono = (byte*)bmpDataMono.Scan0;
+                    for (int y = 0; y < bmpDataColor.Height; y++)
+                    {
+                        for (int x = 0; x < bmpDataColor.Width; x++)
+                        {
+                            // R,G,B同じ値のため、Bの値を代表してモノクロデータへ代入
+                            pMono[x + y * monoStride] = pColor[x * 3 + y * colorStride];
+                        }
+                    }
+                }
+
+                bmpResize.UnlockBits(bmpDataMono);
+                bmpResizeColor.UnlockBits(bmpDataColor);
+
+                //　解放
+                bmpResizeColor.Dispose();
+            }
+            else
+            {
+                // カラー画像のとき
+                bmpResize = bmpResizeColor;
+            }
+
+            return bmpResize;
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            numericUpDown1.Value = numericUpDown2.Value;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            numericUpDown2.Value = numericUpDown1.Value;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            int i=(int)(numericUpDown1.Value + numericUpDown2.Value)/2;
+            numericUpDown1.Value = i;
+            numericUpDown2.Value = i;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            var d1 = numericUpDown1.Value;
+            var d2 = numericUpDown2.Value;
+            numericUpDown1.Value = d2;
+            numericUpDown2.Value = d1;
         }
     }
 }

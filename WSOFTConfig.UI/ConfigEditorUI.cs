@@ -18,6 +18,17 @@ namespace WSOFT.Config.UI
         }
         private string ROOT_NAME = "Config";
         private string reading_filename = null;
+        public string FileName
+        {
+            get
+            {
+                return reading_filename;
+            }
+            set
+            {
+                reading_filename = value;
+            }
+        }
         public ConfigFile Config { get; set; }
 
         private void init()
@@ -135,10 +146,11 @@ namespace WSOFT.Config.UI
         {
             if (e.Node.Tag is NodePath path)
             {
-                textBox1.Text = path.Path;
+                string p = path.Path.TrimStart('/');
+                textBox1.Text = p;
                 if (path.Path != null)
                 {
-                    var c = Config.GetConfig(path.Path);
+                    var c = Config.GetConfig(p);
                     if (c != null)
                     {
                         dataEditor1.Value = c.Value;
@@ -151,20 +163,26 @@ namespace WSOFT.Config.UI
                 }      
             }
         }
-
+        private string EditingPath
+        {
+            get
+            {
+                return textBox1.Text.TrimStart('/');
+            }
+        }
         private void button2_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(textBox1.Text))
+            if(!string.IsNullOrEmpty(EditingPath))
             {
-                Config.GetConfig(textBox1.Text).Value=dataEditor1.Value;
+                Config.Write(EditingPath, dataEditor1.Value);
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox1.Text))
+            if (!string.IsNullOrEmpty(EditingPath))
             {
-                dataEditor1.Value = Config.GetConfig(textBox1.Text).Value;
+                dataEditor1.Value = Config.GetConfig(EditingPath).Value;
             }
         }
 
@@ -266,7 +284,7 @@ namespace WSOFT.Config.UI
                 {
                     if (path.New)
                     {
-                        string target =ROOT_NAME+path.Path + "/"+e.Label;
+                        string target =(ROOT_NAME+path.Path + "/"+e.Label).TrimStart('/');
                         NodePath np = new NodePath();
                         np.Path = target;
                         e.Node.Tag = np;
@@ -298,7 +316,7 @@ namespace WSOFT.Config.UI
         {
             if(treeView1.SelectedNode!=null && treeView1.SelectedNode.Tag is NodePath path)
             {
-                Config.Delete(path.Path);
+                Config.Delete(path.Path.TrimStart('/'));
                 if (treeView1.SelectedNode.Parent != null)
                 {
                     treeView1.SelectedNode.Parent.Nodes.Remove(treeView1.SelectedNode);
@@ -347,7 +365,7 @@ namespace WSOFT.Config.UI
 
         private void 最新の状態に更新ToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            init();
+            Rewrite();
         }
 
         private void フォントの変更ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -386,7 +404,7 @@ namespace WSOFT.Config.UI
         {
             if (treeView1.SelectedNode != null && treeView1.SelectedNode.Tag is NodePath path)
             {
-                Clipboard.SetText(path.Path==null?String.Empty:path.Path);
+                Clipboard.SetText(path.Path==null?String.Empty:path.Path.TrimStart('/'));
             }
         }
 
@@ -419,6 +437,97 @@ namespace WSOFT.Config.UI
             var iopanel = new IOPanel();
             iopanel.Target = this.Config;
             iopanel.Show();
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                OpenToPath("ルート/"+textBox1.Text,treeView1.Nodes);
+            }
+        }
+        /// <summary>
+        /// 指定されたパスを展開します
+        /// </summary>
+        /// <param name="path">展開先のパス</param>
+        private void OpenToPath(string path, TreeNodeCollection nodes)
+        {
+            //この解決が終端かどうか
+            bool endthis;
+            //この解決での対象の名前
+            string currentName;
+            //残りのパス
+            string next = string.Empty;
+
+            int i = path.IndexOf('/');
+            if (i < 0)
+            {
+                currentName = path;
+                endthis = true;
+            }
+            else
+            {
+                currentName = path.Substring(0, i);
+                next = path.Substring(i + 1);
+                endthis = false;
+            }
+            if (nodes.ContainsKey(currentName))
+            {
+                nodes[currentName].Expand();
+                if (!endthis)
+                {
+                    OpenToPath(next, nodes[currentName].Nodes);
+                }
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ファイルからインポートToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (ConfigFile.IsEncryptedFile(openFileDialog1.FileName))
+                {
+                    while (true)
+                    {
+                        try
+                        {
+                            var psd = new PasswordSetDialog();
+                            if (psd.ShowDialog() == DialogResult.OK)
+                            {
+                                Config.Merge(ConfigFile.FromFile(openFileDialog1.FileName, psd.Password));
+                                break;
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                        catch
+                        {
+                            if (MessageBox.Show("ファイルの読み込みに失敗しました。\r\n再試行しますか？", "WSOFTConfig", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.OK)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Config.Merge(ConfigFile.FromFile(openFileDialog1.FileName));
+                }
+                Rewrite();
+            }
+        }
+
+        private void 表示VToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

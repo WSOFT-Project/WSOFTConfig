@@ -416,25 +416,68 @@ namespace WSOFT.Config
         }
 
         /// <summary>
+        /// このConfigFileに指定されたConfigModelを結合します。
+        /// </summary>
+        /// <param name="config">このConfig</param>
+        public void Merge(ConfigFile config)
+        {
+            string[] cs = config.GetAllPaths();
+            foreach(string c in cs)
+            {
+                var v = config.Read(c.TrimStart('/'));
+                if (v != null) {
+                    this.Write(c.TrimStart('/'),v); }
+            }
+        }
+
+        public string[] GetAllPaths(char splitChar='/')
+        {
+            var result =new List<string>();
+            GetSupPaths(this,result,this.Name,splitChar);
+            return result.ToArray();
+        }
+        
+        private void GetSupPaths(ConfigModel config,List<string> list,string baseDir,char splitChar)
+        {
+            foreach(var c in config.Children)
+            {
+                list.Add(baseDir+splitChar+c.Name);
+                GetSupPaths(c,list, baseDir + splitChar + c.Name, splitChar);
+            }
+        }
+
+        /// <summary>
         /// このConfigFileに対する操作が行われる前に発生するイベントです
         /// </summary>
         public event ConfigFileEventHandler Operating;
 
+        /// <summary>
+        /// 指定されたパスを解決し、対応するConfigModelを返します
+        /// </summary>
+        /// <param name="config">解決対象のConfigModel</param>
+        /// <param name="path">解決するパス</param>
+        /// <param name="splitChar">パスの区切り文字</param>
+        /// <param name="createMode">解決するパスが存在しない場合に新規作成して続行するかを表す値</param>
+        /// <returns>解決されたパス。パスが存在せず、作成もしなかった場合はnull。</returns>
         private ConfigModel ResolveConfig(ConfigModel config, string path, char splitChar = '/', bool createMode = false)
         {
             var args = new ConfigFileEventArgs();
             args.Type = ConfigFileEventType.Resolve;
             args.Path = path;
-            Operating?.Invoke(config,args);
-
+            Operating?.Invoke(config, args);
             if (string.IsNullOrEmpty(path))
             {
                 return config;
             }
-            int i = path.IndexOf(splitChar);
+
+            //この解決が終端かどうか
             bool endthis;
+            //この解決での対象の名前
             string currentName;
-            string next = "";
+            //残りのパス
+            string next=string.Empty;
+
+            int i = path.IndexOf(splitChar);
             if (i < 0)
             {
                 currentName = path;
@@ -445,71 +488,34 @@ namespace WSOFT.Config
                 currentName = path.Substring(0, i);
                 next = path.Substring(i + 1);
                 endthis = false;
-            }
-            if (config.Name == currentName)
-            {
-                if (endthis)
-                {
-                    return config;
-                }
-                else
-                {
-                    //検索しているのはこのキーを親に持つキー
-                    return ResolveConfig(config.Children, next, splitChar, createMode);
-                }
-            }
-            else if (createMode)
-            {
-                var ncf = new ConfigModel(currentName);
-                config.Children.Add(ncf);
-                return ResolveConfig(ncf, next, splitChar, createMode);
-            }
-            else
-            {
-                return null;
-            }
-        }
-        private ConfigModel ResolveConfig(List<ConfigModel> configModels, string path, char splitChar = '/', bool createMode = false)
-        {
-            int i = path.IndexOf(splitChar);
-            bool endthis;
-            string currentName;
-            string next = "";
-            if (i < 0)
-            {
-                currentName = path;
-                endthis = true;
-            }
-            else
-            {
-                currentName = path.Substring(0, i);
-                next = path.Substring(i + 1);
-                endthis = false;
-            }
-            ConfigModel cf = configModels.Where(c => !c.Wrong && c.Name == currentName).FirstOrDefault();
-            if (cf != null)
-            {
-                if (endthis)
-                {
-                    return cf;
-                }
-                else
-                {
-                    return ResolveConfig(cf.Children, next, splitChar, createMode);
-                }
-            }
-            else if (createMode)
-            {
-                var ncf = new ConfigModel(currentName);
-                configModels.Add(ncf);
-                return ResolveConfig(ncf, next, splitChar, createMode);
-            }
-            else
-            {
-                return null;
             }
 
+            //名前を検索し解決
+            var result=config.Children.Where(c => c.Name == currentName).FirstOrDefault();
+            if (result == null)
+            {
+                if (createMode)
+                {
+                    //Modelを作成し、現在の要素の子要素にする
+                    result = new ConfigModel(currentName);
+                    config.Children.Add(result);
+                }
+                else
+                {
+                    //見つからなかったため終了
+                    return null;
+                }
+            }
+            //解決の終端ならこのまま終了
+            if (endthis)
+            {
+                return result;
+            }
+            
+            //解決を続行
+            return ResolveConfig(result,next,splitChar,createMode);
         }
+     
     }
 
     /// <summary>

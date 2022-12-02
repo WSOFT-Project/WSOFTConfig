@@ -4,7 +4,7 @@
     <Nullable>enable</Nullable>
     <RootNamespace>WSOFT.Config</RootNamespace>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <TargetFrameworks></TargetFrameworks>
     <Title>WSOFT.Config</Title>
     <Authors>WSOFT</Authors>
@@ -27,5 +27,9 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Drawing.Common" Version="4.0.2.0" />
+	</ItemGroup>
 
 </Project>
