@@ -134,8 +134,6 @@ namespace WSOFT.Config
         }
         public static ConfigModel FromByteArray(byte[] data)
         {
-            try
-            {
                 var l = new List<FlattenConfigModel>();
                 var ms = new MemoryStream(data);
                 int id = 0;
@@ -160,11 +158,6 @@ namespace WSOFT.Config
                     }
                 }
                 return FlattenConfigModel.ToNormalize(l);
-            }
-            catch
-            {
-                return null;
-            }
         }
     }
    

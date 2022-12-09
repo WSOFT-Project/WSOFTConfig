@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WSOFTConfig\WSOFTConfig.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Losetta">
+      <HintPath>..\..\Losetta\Losetta\bin\Release\net6.0\Losetta.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+</Project>

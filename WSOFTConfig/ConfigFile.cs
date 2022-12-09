@@ -86,7 +86,12 @@ namespace WSOFT.Config
                 rawData = Decompress(rawData);
                 iscompressed = true;
             }
-            var f = new ConfigFile(ConfigModel.FromByteArray(rawData));
+            var other = ConfigModel.FromByteArray(rawData);
+            if (other == null)
+            {
+                return new ConfigFile();
+            }
+            var f = new ConfigFile(other);
             f.Password = password;
             f.IsCompressed = iscompressed;
             return f;
