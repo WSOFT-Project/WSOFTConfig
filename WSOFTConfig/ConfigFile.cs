@@ -89,7 +89,7 @@ namespace WSOFT.Config
             var other = ConfigModel.FromByteArray(rawData);
             if (other == null)
             {
-                return new ConfigFile();
+                return null;
             }
             var f = new ConfigFile(other);
             f.Password = password;

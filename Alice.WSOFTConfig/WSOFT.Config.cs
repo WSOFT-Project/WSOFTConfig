@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AliceScript;
+﻿using AliceScript;
 using AliceScript.Interop;
 using WSOFT.Config;
 
@@ -34,20 +29,18 @@ namespace Alice.WSOFTConfig
 
         private void Config_FromFileFunction_Run(object sender, FunctionBaseEventArgs e)
         {
-            Console.WriteLine(e.Args[0].AsString());
             try
             {
                 var configfile = ConfigFile.FromFile(e.Args[0].AsString(), Utils.GetSafeString(e.Args, 1));
-                Console.WriteLine(configfile!=null);
                 if (configfile != null)
                 {
                     e.Return = new Variable(new ConfigObject(configfile));
                 }
             }
-            catch(Exception ex) {
-            Console.WriteLine(ex.Message);
+            catch (Exception)
+            {
             }
-            
+
         }
     }
     internal class ConfigObject : ObjectBase
@@ -57,6 +50,7 @@ namespace Alice.WSOFTConfig
         {
             this.Name = "Config";
             this.Config = configFile;
+            this.Properties.Add("value",new ConfigValueProperty(configFile));
         }
         public override List<string> GetProperties()
         {
@@ -67,11 +61,22 @@ namespace Alice.WSOFTConfig
         private List<string> CreateChildrenNames()
         {
             var r = new List<string>();
-            foreach(var c in Config.Children)
+            foreach (var c in Config.Children)
             {
-                r.Add(c.Name);
+                r.Add(c.Name.ToLower());
             }
             return r;
+        }
+        private ConfigModel SearchConfig(string name)
+        {
+            foreach (var c in Config.Children)
+            {
+                if (c.Name.ToLower() == name.ToLower())
+                {
+                    return c;
+                }
+            }
+            return null;
         }
         public override PropertyBase GetPropertyBase(string sPropertyName)
         {
@@ -80,9 +85,53 @@ namespace Alice.WSOFTConfig
             {
                 return v;
             }
+            var c = SearchConfig(sPropertyName);
+            if (c != null)
+            {
+                return new ConfigKeyProperty(c);
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+    internal class ConfigKeyProperty : PropertyBase
+    {
+        public ConfigModel Config { get; set; }
+        public ConfigKeyProperty(ConfigModel config)
+        {
+            Config = config;
+            this.HandleEvents = true;
+            this.Getting += ConfigKeyProperty_Getting;
+        }
 
-            Console.WriteLine(sPropertyName);
-            return null;
+        private void ConfigKeyProperty_Getting(object sender, PropertyGettingEventArgs e)
+        {
+            e.Value = new Variable(new ConfigObject(new ConfigFile(Config)));
+        }
+    }
+
+    internal class ConfigValueProperty : PropertyBase
+    {
+        public ConfigModel Config { get; set; }
+        public ConfigValueProperty(ConfigModel config)
+        {
+            this.Name = "value";
+            this.HandleEvents = true;
+            this.Getting += ConfigValueProperty_Getting;
+            this.Setting += ConfigValueProperty_Setting;
+            Config = config;
+        }
+
+        private void ConfigValueProperty_Setting(object sender, PropertySettingEventArgs e)
+        {
+            Config.Value = e.Value;
+        }
+
+        private void ConfigValueProperty_Getting(object sender, PropertyGettingEventArgs e)
+        {
+            e.Value = new Variable(Config.Value);
         }
     }
 }

@@ -96,7 +96,7 @@ namespace WSOFT.Config
             }
             catch (Exception ex)
             {
-                return null;
+                throw ex;
             }
         }
         public static ConfigModel ToNormalize(List<FlattenConfigModel> flattens)
